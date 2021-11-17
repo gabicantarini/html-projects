@@ -1,2 +1,2 @@
 # HTML projects
-file to practice HTML
+File to practice HTML
