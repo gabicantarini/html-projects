@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <body>
+
+        <p id="titulo">
+            Validar CPF
+        </p>
+        <p id="acoes">
+            Digite o CPF sem pontos ou traços:<br/>
+            <input id="cpf">
+            <input type="button" value="Validar" onclick="validarCPF();">
+        </p>
+
+    </body>
+
+    <script>
+
+        function validarCPF(){
+
+            var cpf = String(document.getElementById("cpf").value); //para ler o cpf que foi digitado na caixa de txt
+            //o String força a variável a virar txt
+            
+            var cpfDV1 = cpf[9]; //primeiro digito verificador de CPF
+            //para verificar se os dois últimos digitos são validos
+            
+            var cpfDV2 = cpf[10]; //segundo digito verificador de CPF
+            //verificar s eo digito calculado é igual ao digitado
+            var soma = 0;    
+            // Armazeno a somatória de valores para o cálculo dos DV
+            //var soma = 0; //soma das multiplicações que validam o cpf
+
+             // Laço que calcula a soma do primeiro DV  
+            for(i=0; i<=8; i++) { //vamos de 0 a 8 para conseguir trabalhar os 9 digitos do cpf
+                soma += cpf[i] * (10-i);
+            }
+            
+            // Cálculo do primeiro DV
+            var calcDV1 = 11 - (soma % 11); //% retorna o resto da divisão ou seja, fica 11 menos o resto da divisão
+
+            // Zerando a soma para inicar o próximo passo
+            soma = 0;
+
+            // Laço que calcula a soma do segundo DV
+            for(i=0; i<=9; i++) {
+                soma += cpf[i] * (11-i);
+            }
+            // Cálculo do segundo DV
+            var calcDV2 = 11 - (soma % 11);
+
+            // Verificação se os DV calculados são iguais aos DV digitados
+            if(cpfDV1==calcDV1 && cpfDV2==calcDV2) {
+                alert("CPF é válido.");            
+            } else {                
+                alert("CPF é inválido.")            
+            }
+
+        }
+    </script>
+</html>
+<!--no primeiro laço vamos de 0 a 8 para conseguir trabalhar os 9 digitos do cpf-->
